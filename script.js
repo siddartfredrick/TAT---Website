@@ -30,14 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (contactForm) {
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
-            // Get the reCAPTCHA response
-            const recaptchaResponse = grecaptcha.getResponse();
-            
-            if (!recaptchaResponse) {
-                alert('Please complete the reCAPTCHA verification.');
-                return;
-            }
 
             // Get form data
             const formData = {
@@ -45,13 +37,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 preferredLanguage: document.getElementById('preferredLanguage').value,
-                message: document.getElementById('message').value,
-                'g-recaptcha-response': recaptchaResponse
+                message: document.getElementById('message').value
             };
 
             try {
-                // Replace this URL with your actual server endpoint
-                const response = await fetch('YOUR_SERVER_ENDPOINT', {
+                const response = await fetch('http://localhost:3000/api/contact', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -62,9 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (response.ok) {
                     alert('Thank you for your message. We will get back to you soon!');
                     contactForm.reset();
-                    grecaptcha.reset();
                 } else {
-                    throw new Error('Failed to send message');
+                    const data = await response.json();
+                    throw new Error(data.error || 'Failed to send message');
                 }
             } catch (error) {
                 console.error('Error:', error);
