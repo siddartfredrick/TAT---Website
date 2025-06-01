@@ -28,31 +28,48 @@ document.addEventListener('DOMContentLoaded', () => {
     // Contact form handling
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
+        contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            // Verify reCAPTCHA
+            // Get the reCAPTCHA response
             const recaptchaResponse = grecaptcha.getResponse();
+            
             if (!recaptchaResponse) {
-                alert('Please complete the reCAPTCHA verification');
+                alert('Please complete the reCAPTCHA verification.');
                 return;
             }
-            
+
             // Get form data
-            const formData = new FormData(contactForm);
-            formData.append('g-recaptcha-response', recaptchaResponse);
-            const data = Object.fromEntries(formData.entries());
-            
-            // Here you would typically send the data to your server
-            // For now, we'll just log it and show a success message
-            console.log('Form submitted:', data);
-            
-            // Show success message
-            alert('Thank you for your message! I will get back to you soon.');
-            
-            // Clear form and reCAPTCHA
-            contactForm.reset();
-            grecaptcha.reset();
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                preferredLanguage: document.getElementById('preferredLanguage').value,
+                message: document.getElementById('message').value,
+                'g-recaptcha-response': recaptchaResponse
+            };
+
+            try {
+                // Replace this URL with your actual server endpoint
+                const response = await fetch('YOUR_SERVER_ENDPOINT', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    alert('Thank you for your message. We will get back to you soon!');
+                    contactForm.reset();
+                    grecaptcha.reset();
+                } else {
+                    throw new Error('Failed to send message');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Sorry, there was an error sending your message. Please try again later.');
+            }
         });
     }
 }); 
