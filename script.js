@@ -49,41 +49,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Contact form handling
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                phone: document.getElementById('phone').value,
-                preferredLanguage: document.getElementById('preferredLanguage').value,
-                message: document.getElementById('message').value
-            };
-
-            try {
-                const response = await fetch('http://localhost:3000/api/contact', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (response.ok) {
-                    alert('Thank you for your message. We will get back to you soon!');
-                    contactForm.reset();
-                } else {
-                    const data = await response.json();
-                    throw new Error(data.error || 'Failed to send message');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Sorry, there was an error sending your message. Please try again later.');
-            }
-        });
-    }
 }); 
