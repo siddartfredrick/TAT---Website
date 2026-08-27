@@ -25,7 +25,7 @@
                 <a href="#about">About</a>
                 <a href="#services">Services</a>
                 <a href="#philosophy">Philosophy</a>
-                <a href="#book-consultation" target="_blank" class="contact-btn">Book Now</a>
+                <a href="#book-consultation" class="contact-btn">Book Now</a>
             </div>
         </div>
     </nav>
@@ -35,7 +35,7 @@
             <div class="hero-content">
                 <h1>Welcome. <span class="accent">Marhaba.</span></h1>
                 <p class="hero-text" style="font-style: italic;">"Qalb, in Arabic means heart. In its depths reside love, faith, and transformation. It is where change begins, where sincerity lives, and where the essence of who we are is quietly held."</p>
-                <a href="https://qalbandmind.janeapp.com/#staff_member/1" target="_blank" class="cta-button">Get Started</a>
+                <a href="#book-consultation" class="cta-button">Get Started</a>
             </div>
         </section>
 
@@ -64,8 +64,8 @@
                             <ul class="therapy-list">
                                 <li>Trauma-Informed Cognitive Behavioural Therapy (TF-CBT)</li>
                                 <li>Motivational Interviewing</li>
-                                <li>EMDR (Eye Movement Desensitization and Reprocessing</li>
-                                <li>Gottman Couples Therapy, Levels 1&2</li>
+                                <li>EMDR (Eye Movement Desensitization and Reprocessing)</li>
+                                <li>Gottman Couples Therapy, Levels 1 &amp; 2</li>
                             </ul>
 
                             <p class="consultation-note">If you want to learn more about who I am and how therapy would look, please feel free to book a consultation with me. I am more than happy to answer any questions or concerns you might have. I look forward to us connecting!</p>
@@ -137,12 +137,85 @@
 
         <section id="book-consultation" class="section alternate">
             <div class="container">
-                <h2>Book a Consultation</h2>
-                <div class="philosophy-container">
-                    <div class="philosophy-card">
-                        <p>I'm here to support you—wherever you are on your journey. My approach to therapy is grounded in compassion, empathy, and a non-judgmental space where you can feel safe and heard.</p>
-                        <p>You don't have to go through this alone. Let's connect for a free 15-minute consultation. I'm happy to answer your questions and explore how I can best support you.</p>
-                        <a href="https://qalbandmind.janeapp.com/#staff_member/1" target="_blank" class="cta-button">Book Now</a>
+                <h2>Request a Free Consultation</h2>
+                <div class="consultation-form-container">
+                    <div class="consultation-card">
+                        <p class="consultation-intro">Interested in working together? Complete the form below to request a free 15-minute consultation. Sarah will follow up with you by email to arrange a time.</p>
+
+                        <div class="form-status form-success" data-fs-success>
+                            Thank you! Your consultation request has been sent. Sarah will be in touch soon.
+                        </div>
+                        <div class="form-status form-error" data-fs-error>
+                            Sorry, something went wrong. Please check the form and try again.
+                        </div>
+
+                        <form
+                            id="consultation-form"
+                            class="consultation-form"
+                            action="https://formspree.io/f/xwlkeygr"
+                            method="POST"
+                        >
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    autocomplete="name"
+                                    required
+                                    data-fs-field
+                                >
+                                <span class="field-error" data-fs-error="name"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    autocomplete="email"
+                                    required
+                                    data-fs-field
+                                >
+                                <span class="field-error" data-fs-error="email"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone Number <span class="optional">(optional)</span></label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    autocomplete="tel"
+                                    data-fs-field
+                                >
+                                <span class="field-error" data-fs-error="phone"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-method">Preferred Contact Method</label>
+                                <select
+                                    id="contact-method"
+                                    name="preferred_contact_method"
+                                    required
+                                    data-fs-field
+                                >
+                                    <option value="" selected disabled>Please select</option>
+                                    <option value="Email">Email</option>
+                                    <option value="Phone">Phone</option>
+                                </select>
+                                <span class="field-error" data-fs-error="preferred_contact_method"></span>
+                            </div>
+
+                            <p class="privacy-note">
+                                Please do not include sensitive or confidential health information in this form. This form is intended only for consultation and scheduling requests.
+                            </p>
+
+                            <button type="submit" class="cta-button form-submit-button" data-fs-submit-btn>
+                                Request a Consultation
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -168,6 +241,19 @@
             </div>
         </div>
     </footer>
+    <script>
+        window.formspree =
+            window.formspree ||
+            function () {
+                (formspree.q = formspree.q || []).push(arguments);
+            };
+
+        formspree('initForm', {
+            formElement: '#consultation-form',
+            formId: 'xwlkeygr'
+        });
+    </script>
+    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
     <script src="script.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-84RM76TWQD"></script>
