@@ -49,4 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Require phone number when Phone is selected as the preferred contact method
+    const contactMethod = document.querySelector('#contact-method');
+    const phoneInput = document.querySelector('#phone');
+    const phoneOptionalLabel = document.querySelector('label[for="phone"] .optional');
+
+    function updatePhoneRequirement() {
+        const phoneSelected = contactMethod.value === 'Phone';
+
+        phoneInput.required = phoneSelected;
+
+        if (phoneOptionalLabel) {
+            phoneOptionalLabel.textContent = phoneSelected ? '(required)' : '(optional)';
+        }
+    }
+
+    if (contactMethod && phoneInput) {
+        contactMethod.addEventListener('change', updatePhoneRequirement);
+        updatePhoneRequirement();
+    }
+
 }); 
