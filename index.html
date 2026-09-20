@@ -194,6 +194,7 @@
                         <form id="consultation-form" class="consultation-form" action="https://formspree.io/f/xwlkegyr"
                             method="POST">
                             <input type="text" name="_gotcha" class="honeypot" tabindex="-1" autocomplete="off">
+                            <input type="hidden" name="subject" value="New consultation request — {{ name }}">
                             <div class="form-group">
                                 <label for="name">Name</label>
                                 <input type="text" id="name" name="name" autocomplete="name" required data-fs-field>
@@ -222,21 +223,22 @@
                                 <span class="field-error" data-fs-error="preferred_contact_method"></span>
                             </div>
 
-                    <div class="turnstile-container">
-                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAEppqV7VjKBIuqmI"></div>
+                            <div class="turnstile-container">
+                                <div class="cf-turnstile" data-sitekey="0x4AAAAAAEppqV7VjKBIuqmI"></div>
+                            </div>
+
+                            <p class="privacy-note">
+                                Please do not include sensitive or confidential health information in this form. This
+                                form is
+                                intended only for consultation and scheduling requests.
+                            </p>
+
+                            <button type="submit" class="cta-button form-submit-button" data-fs-submit-btn>
+                                Request a Consultation
+                            </button>
+                        </form>
                     </div>
-
-                    <p class="privacy-note">
-                        Please do not include sensitive or confidential health information in this form. This form is
-                        intended only for consultation and scheduling requests.
-                    </p>
-
-                    <button type="submit" class="cta-button form-submit-button" data-fs-submit-btn>
-                        Request a Consultation
-                    </button>
-                    </form>
                 </div>
-            </div>
             </div>
         </section>
 
